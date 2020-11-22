@@ -1,13 +1,28 @@
-# asl_turtlebot
+# CS237A 2020 Final Project -- Autonomous Food Delivery
 
-This contains a _starting point_ for your final project. Below are _brief_ descriptions of the code. You are strongly encouraged to take a closer look into the code for more details of how and what the code does.
+This project consisted to 2 phases: exploration phase and delivery phase. 
+Below are _brief_ descriptions of the code.
+
+### Exploration
+- Navigate the city without colliding into obstacles.
+- Record locations of food vendors.
+
+### Delivery
+- Receive and process requests for delivery.
+- Autonomously drive through the city to pick up desired items and deliver them to the goal.
+
+### Extensions
+- Stopping at STOP signs
+- Appropriate Greeting: A “meow” for a cat, a “woof” for a dog,  a “hello” for a person.
+- Marking and labelling objects on rviz map!
+
 
 **File Descriptions:**
 
 **Gazebo Simulation Files:**
 ----------------------
 
-launch/project_sim.launch: Launches gazebo with a (rough, tentative) model of the final project environment, as well as the core SLAM and detector nodes. You'll need to run your navigator and other project nodes separately.
+launch/project_sim.launch: Launches gazebo with a (rough, tentative) model of the final project environment, as well as the core SLAM and detector nodes.
 
 robots/asl_turtlebot.urdf.xacro, turtlebot3_burger.gazebo.xacro, turtlebot3_burger.urdf.xacro: Turtlebot 3D model definitions for gazebo.
 
@@ -39,18 +54,11 @@ scripts/grids.py: Used for motion planning. Performs collision checking on occup
 
 scripts/keyboard_teleop.py: Alternative teleoperation to standard turtlebot3_teleop.launch.
 
-scripts/navigator.py: Node that manages point to point robot navigation, uses your A\* implementation (HW2) in an MPC framework along with cubic spline interpolation and the differential flatness controller (from HW1), switching to the pose controller from HW1 when close to the goal.
-
-scripts/puddle_viz.py: Subscribes to the filtered velodyne points produced by velodyne_filter.launch (/velodyne_puddle_filter). Identifies approximate location of a highly reflective region on the ground (i.e. puddles) and places a marker and tf frame over it. **DISCLAIMER:**  This is very rough starter code meant to serve as an example for point cloud processing. This code is not robust and is not integrated with any of the existing stack. For example, this node cannot deal with multiple puddles simultaneously and estimates location naively. This is by no means the only or expected approach to identifying puddles and your group is expected to entirely repurpose or rewrite this code to suit your team's objectives.
+scripts/navigator.py: Node that manages point to point robot navigation, uses A\* implementation in an MPC framework along with cubic spline interpolation and the differential flatness controller, switching to the pose controller when close to the goal.
 
 scripts/utils.py: Utility functions. Currently contains a wrapToPi function, but feel free to add to this.
 
 scripts/request_publisher.py: Utility to submit a delivery request. We'll use this to send orders for the project.
-
-***Files From HW***
-
-scripts/controllers/ should contain P1_pose_stabilization.py and P2_trajectory_tracking.py from HW1
-scripts/planners/ should contain P1_astar.py from HW2
 
 
 **Message Definitions:**
